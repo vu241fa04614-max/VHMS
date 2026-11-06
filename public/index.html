@@ -1,0 +1,1293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Vignan Hostel Management System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="/css/design-system.css"/>
+  <style>
+    /* ——— LANDING PAGE SPECIFIC STYLES ——— */
+    body { background: var(--bg-surface); }
+
+    /* Navigation */
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: var(--color-midnight);
+      border-bottom: 1px solid var(--border-dark);
+      height: 64px;
+      display: flex;
+      align-items: center;
+    }
+    .nav-inner {
+      max-width: 1280px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 0 var(--space-xl);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+    .nav-logo {
+      width: 38px;
+      height: 38px;
+      background: var(--color-crimson);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .nav-logo svg { color: #fff; }
+    .nav-brand-text {
+      display: flex;
+      flex-direction: column;
+    }
+    .nav-brand-name {
+      font-size: 14px;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: 0.01em;
+      line-height: 1.1;
+    }
+    .nav-brand-sub {
+      font-size: 10px;
+      color: var(--text-on-dark);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+    }
+    .nav-link {
+      padding: 8px 16px;
+      font-size: var(--text-sm);
+      font-weight: 500;
+      color: var(--text-on-dark);
+      transition: color var(--transition-fast);
+    }
+    .nav-link:hover { color: #fff; }
+    .nav-actions { display: flex; gap: var(--space-sm); }
+    .nav-mobile-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: #fff;
+      cursor: pointer;
+      padding: 8px;
+    }
+
+    /* Hero */
+    .hero {
+      background: var(--color-midnight);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      padding-top: 64px;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0; right: 0;
+      width: 50%;
+      height: 100%;
+      background: var(--color-inst-blue);
+      opacity: 0.08;
+      clip-path: polygon(20% 0, 100% 0, 100% 100%, 0% 100%);
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 100%;
+      height: 2px;
+      background: var(--color-crimson);
+    }
+    .hero-grid-pattern {
+      position: absolute;
+      inset: 0;
+      opacity: 0.03;
+      background-image: 
+        linear-gradient(var(--color-royal-blue) 1px, transparent 1px),
+        linear-gradient(90deg, var(--color-royal-blue) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+    .hero-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 80px var(--space-xl);
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+      width: 100%;
+    }
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(179,38,53,0.15);
+      border: 1px solid rgba(179,38,53,0.3);
+      padding: 6px 14px;
+      font-size: var(--text-xs);
+      font-weight: 700;
+      color: #E88A93;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: var(--space-lg);
+    }
+    .hero-title {
+      font-size: 52px;
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+      margin-bottom: var(--space-lg);
+    }
+    .hero-title-accent {
+      color: var(--color-gold);
+      display: block;
+    }
+    .hero-desc {
+      font-size: var(--text-md);
+      color: var(--text-on-dark);
+      line-height: 1.7;
+      max-width: 520px;
+      margin-bottom: var(--space-xl);
+    }
+    .hero-ctas {
+      display: flex;
+      gap: var(--space-md);
+      flex-wrap: wrap;
+    }
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-md);
+      margin-top: var(--space-xl);
+      padding-top: var(--space-xl);
+      border-top: 1px solid var(--border-dark);
+    }
+    .hero-stat-num {
+      font-size: var(--text-2xl);
+      font-weight: 800;
+      color: #fff;
+    }
+    .hero-stat-label {
+      font-size: var(--text-xs);
+      color: var(--text-on-dark);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    /* Hero Visual */
+    .hero-visual {
+      position: relative;
+    }
+    .dashboard-preview {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-dark);
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    }
+    .dp-header {
+      background: var(--color-midnight);
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border-bottom: 1px solid var(--border-dark);
+    }
+    .dp-dot { width: 10px; height: 10px; background: var(--border-dark); }
+    .dp-dot.red { background: #C83D45; }
+    .dp-dot.yellow { background: #C88720; }
+    .dp-dot.green { background: #16845B; }
+    .dp-url {
+      flex: 1;
+      background: rgba(255,255,255,0.05);
+      height: 24px;
+      margin-left: 8px;
+      display: flex;
+      align-items: center;
+      padding: 0 10px;
+    }
+    .dp-url-text { font-size: 11px; color: var(--text-muted); font-family: var(--font-mono); }
+    .dp-body { display: flex; height: 340px; }
+    .dp-sidebar {
+      width: 60px;
+      background: var(--bg-sidebar);
+      border-right: 1px solid var(--border-dark);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 12px 0;
+      gap: 8px;
+    }
+    .dp-nav-dot {
+      width: 32px;
+      height: 6px;
+      background: rgba(255,255,255,0.1);
+    }
+    .dp-nav-dot.active { background: var(--color-gold); }
+    .dp-main { flex: 1; padding: 16px; overflow: hidden; }
+    .dp-metric-row { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin-bottom: 10px; }
+    .dp-metric {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-left: 3px solid var(--color-inst-blue);
+      padding: 10px;
+    }
+    .dp-metric.c { border-left-color: var(--color-crimson); }
+    .dp-metric.g { border-left-color: var(--color-success); }
+    .dp-metric.o { border-left-color: var(--color-gold); }
+    .dp-metric-num { font-size: 20px; font-weight: 800; color: var(--text-primary); }
+    .dp-metric-lbl { font-size: 9px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em; }
+    .dp-chart-area {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      height: 120px;
+      display: flex;
+      align-items: flex-end;
+      padding: 12px;
+      gap: 6px;
+    }
+    .dp-bar {
+      flex: 1;
+      background: var(--color-inst-blue);
+      opacity: 0.7;
+      min-height: 20px;
+    }
+    .dp-bar.a { opacity: 1; }
+    .dp-bar.c { background: var(--color-crimson); }
+    .dp-table-preview {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      margin-top: 8px;
+    }
+    .dp-row {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      padding: 6px 10px;
+      border-bottom: 1px solid var(--bg-secondary);
+      gap: 8px;
+    }
+    .dp-row:last-child { border-bottom: none; }
+    .dp-cell { height: 8px; background: var(--bg-secondary); }
+    .dp-cell.colored { background: var(--color-success); opacity: 0.4; }
+    .dp-cell.red { background: var(--color-crimson); opacity: 0.4; }
+
+    /* Sections */
+    section { padding: 80px 0; }
+    section:nth-child(even) { background: var(--bg-main); }
+
+    .section-label {
+      font-size: var(--text-xs);
+      font-weight: 700;
+      color: var(--color-crimson);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-bottom: var(--space-sm);
+    }
+    .section-title {
+      font-size: var(--text-3xl);
+      font-weight: 800;
+      color: var(--text-primary);
+      line-height: 1.15;
+      letter-spacing: -0.01em;
+      margin-bottom: var(--space-md);
+    }
+    .section-desc {
+      font-size: var(--text-md);
+      color: var(--text-secondary);
+      max-width: 600px;
+      line-height: 1.7;
+    }
+    .section-header { margin-bottom: var(--space-2xl); }
+    .section-header.centered { text-align: center; }
+    .section-header.centered .section-desc { margin: 0 auto; }
+
+    /* Features Grid */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-md);
+    }
+    .feature-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-top: 3px solid var(--color-inst-blue);
+      padding: var(--space-xl);
+      transition: border-top-color var(--transition-fast), box-shadow var(--transition-normal);
+    }
+    .feature-card:hover {
+      border-top-color: var(--color-crimson);
+      box-shadow: var(--shadow-md);
+    }
+    .feature-icon {
+      width: 48px;
+      height: 48px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: var(--space-md);
+      color: var(--color-inst-blue);
+    }
+    .feature-title {
+      font-size: var(--text-md);
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: var(--space-sm);
+    }
+    .feature-desc {
+      font-size: var(--text-sm);
+      color: var(--text-secondary);
+      line-height: 1.65;
+    }
+
+    /* Roles Section */
+    .roles-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--space-md);
+    }
+    .role-card {
+      border: 2px solid var(--border-color);
+      padding: var(--space-xl);
+      position: relative;
+      overflow: hidden;
+      background: var(--bg-surface);
+    }
+    .role-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+    }
+    .role-card.r1::before { background: var(--color-crimson); }
+    .role-card.r2::before { background: var(--color-inst-blue); }
+    .role-card.r3::before { background: var(--color-gold); }
+    .role-card.r4::before { background: var(--color-success); }
+    .role-num {
+      font-size: 48px;
+      font-weight: 800;
+      color: var(--border-color);
+      line-height: 1;
+      margin-bottom: var(--space-sm);
+      font-variant-numeric: tabular-nums;
+    }
+    .role-title {
+      font-size: var(--text-md);
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: var(--space-sm);
+    }
+    .role-desc {
+      font-size: var(--text-sm);
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+    .role-perms {
+      margin-top: var(--space-md);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .role-perm {
+      font-size: var(--text-xs);
+      color: var(--text-secondary);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .role-perm::before { content: '→'; color: var(--color-inst-blue); font-weight: 700; }
+
+    /* Facilities */
+    .facilities-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--space-md);
+    }
+    .facility-item {
+      display: flex;
+      align-items: center;
+      gap: var(--space-md);
+      padding: var(--space-md);
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+    }
+    .facility-icon {
+      width: 44px;
+      height: 44px;
+      background: var(--bg-secondary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: var(--color-inst-blue);
+    }
+    .facility-name {
+      font-size: var(--text-sm);
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+    .facility-desc {
+      font-size: var(--text-xs);
+      color: var(--text-muted);
+    }
+
+    /* Process Steps */
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: var(--border-color);
+    }
+    .step {
+      background: var(--bg-surface);
+      padding: var(--space-xl);
+      position: relative;
+    }
+    .step-num {
+      font-size: var(--text-3xl);
+      font-weight: 800;
+      color: var(--border-color);
+      line-height: 1;
+      margin-bottom: var(--space-md);
+    }
+    .step-title {
+      font-size: var(--text-md);
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: var(--space-sm);
+    }
+    .step-desc {
+      font-size: var(--text-sm);
+      color: var(--text-secondary);
+      line-height: 1.65;
+    }
+
+    /* Stats Banner */
+    .stats-banner {
+      background: var(--color-midnight);
+      border-top: 1px solid var(--border-dark);
+      border-bottom: 1px solid var(--border-dark);
+      padding: 60px 0;
+    }
+    .stats-banner-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: var(--border-dark);
+    }
+    .stat-banner-item {
+      background: var(--color-midnight);
+      padding: var(--space-xl);
+      text-align: center;
+    }
+    .stat-banner-num {
+      font-size: var(--text-3xl);
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+    .stat-banner-label {
+      font-size: var(--text-xs);
+      color: var(--text-on-dark);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .stat-banner-accent { color: var(--color-gold); }
+
+    /* CTA Section */
+    .cta-section {
+      background: var(--color-inst-blue);
+      padding: 80px 0;
+    }
+    .cta-inner {
+      max-width: 760px;
+      margin: 0 auto;
+      text-align: center;
+      padding: 0 var(--space-lg);
+    }
+    .cta-title {
+      font-size: var(--text-3xl);
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: var(--space-md);
+    }
+    .cta-desc {
+      font-size: var(--text-md);
+      color: rgba(255,255,255,0.75);
+      margin-bottom: var(--space-xl);
+      line-height: 1.65;
+    }
+    .cta-btns {
+      display: flex;
+      gap: var(--space-md);
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .btn-white {
+      background: #fff;
+      color: var(--color-inst-blue);
+      border-color: #fff;
+      font-weight: 700;
+    }
+    .btn-white:hover { background: var(--bg-secondary); border-color: var(--bg-secondary); }
+    .btn-outline-white {
+      background: transparent;
+      color: #fff;
+      border: 2px solid rgba(255,255,255,0.4);
+      font-weight: 700;
+    }
+    .btn-outline-white:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.7); }
+
+    /* Contact */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-2xl);
+      align-items: start;
+    }
+    .contact-item {
+      display: flex;
+      gap: var(--space-md);
+      padding: var(--space-md);
+      border: 1px solid var(--border-color);
+      margin-bottom: var(--space-sm);
+    }
+    .contact-icon {
+      width: 44px;
+      height: 44px;
+      background: var(--bg-secondary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: var(--color-inst-blue);
+    }
+
+    /* Footer */
+    .footer {
+      background: var(--color-midnight);
+      padding: 60px 0 24px;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: var(--space-2xl);
+      margin-bottom: var(--space-2xl);
+    }
+    .footer-logo-row {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      margin-bottom: var(--space-md);
+    }
+    .footer-logo {
+      width: 36px;
+      height: 36px;
+      background: var(--color-crimson);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .footer-brand-name {
+      font-size: var(--text-sm);
+      font-weight: 800;
+      color: #fff;
+    }
+    .footer-desc {
+      font-size: var(--text-sm);
+      color: var(--text-on-dark);
+      line-height: 1.65;
+      margin-bottom: var(--space-md);
+    }
+    .footer-col-title {
+      font-size: var(--text-xs);
+      font-weight: 700;
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: var(--space-md);
+    }
+    .footer-links { display: flex; flex-direction: column; gap: 8px; }
+    .footer-link {
+      font-size: var(--text-sm);
+      color: var(--text-on-dark);
+      transition: color var(--transition-fast);
+    }
+    .footer-link:hover { color: var(--color-gold); }
+    .footer-bottom {
+      border-top: 1px solid var(--border-dark);
+      padding-top: var(--space-lg);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .footer-copyright {
+      font-size: var(--text-xs);
+      color: var(--text-muted);
+    }
+    .footer-badges { display: flex; gap: var(--space-sm); }
+    .footer-badge {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--text-muted);
+      border: 1px solid var(--border-dark);
+      padding: 3px 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    /* Mobile nav */
+    .mobile-nav {
+      display: none;
+      position: fixed;
+      top: 64px;
+      left: 0;
+      right: 0;
+      background: var(--color-midnight);
+      border-bottom: 1px solid var(--border-dark);
+      flex-direction: column;
+      padding: var(--space-md);
+      gap: 4px;
+      z-index: 99;
+    }
+    .mobile-nav.open { display: flex; }
+    .mobile-nav-link {
+      padding: 10px var(--space-md);
+      color: var(--text-on-dark);
+      font-size: var(--text-sm);
+      font-weight: 500;
+    }
+    .mobile-nav-link:hover { color: #fff; background: rgba(255,255,255,0.05); }
+
+    @media (max-width: 1024px) {
+      .hero-inner { grid-template-columns: 1fr; gap: var(--space-2xl); }
+      .hero-visual { display: none; }
+      .hero-title { font-size: 40px; }
+      .features-grid { grid-template-columns: repeat(2, 1fr); }
+      .roles-grid { grid-template-columns: repeat(2, 1fr); }
+      .facilities-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: var(--space-xl); }
+    }
+    @media (max-width: 768px) {
+      .nav-links, .nav-actions { display: none; }
+      .nav-mobile-toggle { display: flex; }
+      .hero-title { font-size: 32px; }
+      .hero-stats { grid-template-columns: repeat(3, 1fr); }
+      section { padding: 60px 0; }
+      .section-title { font-size: var(--text-2xl); }
+      .features-grid, .roles-grid { grid-template-columns: 1fr; }
+      .facilities-grid { grid-template-columns: 1fr 1fr; }
+      .steps-grid { grid-template-columns: 1fr; }
+      .stats-banner-grid { grid-template-columns: repeat(2, 1fr); }
+      .contact-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; gap: var(--space-md); text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVIGATION -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <div class="nav-brand">
+        <div class="nav-logo">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <div class="nav-brand-text">
+          <span class="nav-brand-name">VHMS</span>
+          <span class="nav-brand-sub">Vignan University</span>
+        </div>
+      </div>
+      <div class="nav-links">
+        <a href="#features" class="nav-link">Platform</a>
+        <a href="#roles" class="nav-link">Access Roles</a>
+        <a href="#facilities" class="nav-link">Facilities</a>
+        <a href="#contact" class="nav-link">Contact</a>
+      </div>
+      <div class="nav-actions">
+        <a href="/login.html?role=student" class="btn btn-outline-dark" style="color:#CBD5E1;border-color:rgba(255,255,255,0.2)">Student Login</a>
+        <a href="/login.html?role=admin" class="btn btn-crimson">Admin Login</a>
+      </div>
+      <button class="nav-mobile-toggle" onclick="document.getElementById('mobileNav').classList.toggle('open')" aria-label="Toggle navigation">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+    </div>
+  </nav>
+  <div class="mobile-nav" id="mobileNav">
+    <a href="#features" class="mobile-nav-link">Platform</a>
+    <a href="#roles" class="mobile-nav-link">Access Roles</a>
+    <a href="#facilities" class="mobile-nav-link">Facilities</a>
+    <a href="#contact" class="mobile-nav-link">Contact</a>
+    <div style="height:1px;background:var(--border-dark);margin:8px 0"></div>
+    <a href="/login.html?role=student" class="mobile-nav-link">Student Login</a>
+    <a href="/login.html?role=admin" class="mobile-nav-link" style="color:var(--color-gold)">Admin Login</a>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="hero-grid-pattern"></div>
+    <div class="hero-inner">
+      <div class="hero-content">
+        <div class="hero-eyebrow">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+          Vignan University · Campus Management Platform
+        </div>
+        <h1 class="hero-title">
+          Smarter Hostel<br/>Management.
+          <span class="hero-title-accent">Better Campus Living.</span>
+        </h1>
+        <p class="hero-desc">
+          A unified digital platform connecting students, wardens, and hostel administration through smarter, faster, and more transparent campus operations.
+        </p>
+        <div class="hero-ctas">
+          <a href="/login.html?role=student" class="btn btn-xl btn-crimson">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            Student Portal
+          </a>
+          <a href="/login.html?role=admin" class="btn btn-xl btn-outline-white">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            Administrator Login
+          </a>
+        </div>
+        <div class="hero-stats">
+          <div>
+            <div class="hero-stat-num">550+</div>
+            <div class="hero-stat-label">Hostel Capacity</div>
+          </div>
+          <div>
+            <div class="hero-stat-num">180+</div>
+            <div class="hero-stat-label">Rooms Managed</div>
+          </div>
+          <div>
+            <div class="hero-stat-num">24/7</div>
+            <div class="hero-stat-label">Platform Uptime</div>
+          </div>
+        </div>
+      </div>
+      <div class="hero-visual" aria-hidden="true">
+        <div class="dashboard-preview">
+          <div class="dp-header">
+            <div class="dp-dot red"></div>
+            <div class="dp-dot yellow"></div>
+            <div class="dp-dot green"></div>
+            <div class="dp-url">
+              <span class="dp-url-text">vhms.vignan.ac.in/admin-dashboard</span>
+            </div>
+          </div>
+          <div class="dp-body">
+            <div class="dp-sidebar">
+              <div class="dp-nav-dot active"></div>
+              <div class="dp-nav-dot"></div>
+              <div class="dp-nav-dot"></div>
+              <div class="dp-nav-dot"></div>
+              <div class="dp-nav-dot"></div>
+              <div class="dp-nav-dot"></div>
+            </div>
+            <div class="dp-main">
+              <div class="dp-metric-row">
+                <div class="dp-metric">
+                  <div class="dp-metric-num">548</div>
+                  <div class="dp-metric-lbl">Total Students</div>
+                </div>
+                <div class="dp-metric c">
+                  <div class="dp-metric-num">12</div>
+                  <div class="dp-metric-lbl">Pending Outpass</div>
+                </div>
+                <div class="dp-metric g">
+                  <div class="dp-metric-num">₹24L</div>
+                  <div class="dp-metric-lbl">Fee Collected</div>
+                </div>
+                <div class="dp-metric o">
+                  <div class="dp-metric-num">87%</div>
+                  <div class="dp-metric-lbl">Occupancy Rate</div>
+                </div>
+              </div>
+              <div class="dp-chart-area">
+                <div class="dp-bar" style="height:40%"></div>
+                <div class="dp-bar" style="height:65%"></div>
+                <div class="dp-bar" style="height:55%"></div>
+                <div class="dp-bar a" style="height:80%"></div>
+                <div class="dp-bar" style="height:70%"></div>
+                <div class="dp-bar" style="height:90%"></div>
+                <div class="dp-bar c" style="height:50%"></div>
+                <div class="dp-bar" style="height:75%"></div>
+              </div>
+              <div class="dp-table-preview">
+                <div class="dp-row">
+                  <div class="dp-cell"></div>
+                  <div class="dp-cell colored"></div>
+                  <div class="dp-cell"></div>
+                </div>
+                <div class="dp-row">
+                  <div class="dp-cell"></div>
+                  <div class="dp-cell red"></div>
+                  <div class="dp-cell"></div>
+                </div>
+                <div class="dp-row">
+                  <div class="dp-cell"></div>
+                  <div class="dp-cell colored"></div>
+                  <div class="dp-cell"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS BANNER -->
+  <div class="stats-banner">
+    <div class="container">
+      <div class="stats-banner-grid">
+        <div class="stat-banner-item">
+          <div class="stat-banner-num">2 <span class="stat-banner-accent">Hostels</span></div>
+          <div class="stat-banner-label">Boys & Girls Facilities</div>
+        </div>
+        <div class="stat-banner-item">
+          <div class="stat-banner-num">550+ <span class="stat-banner-accent">Students</span></div>
+          <div class="stat-banner-label">Currently Enrolled</div>
+        </div>
+        <div class="stat-banner-item">
+          <div class="stat-banner-num">180+ <span class="stat-banner-accent">Rooms</span></div>
+          <div class="stat-banner-label">Fully Managed</div>
+        </div>
+        <div class="stat-banner-item">
+          <div class="stat-banner-num">4 <span class="stat-banner-accent">Roles</span></div>
+          <div class="stat-banner-label">Role-Based Access Control</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FEATURES -->
+  <section id="features" style="background:var(--bg-main)">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">Platform Capabilities</div>
+        <h2 class="section-title">Everything You Need to<br/>Manage a Modern Hostel</h2>
+        <p class="section-desc">A comprehensive suite of management tools designed for the complex operational needs of a university residential facility.</p>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <h3 class="feature-title">Student Management</h3>
+          <p class="feature-desc">Comprehensive student profiles with registration details, department info, emergency contacts, and hostel allocation history. Full CRUD with search and filtering.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          </div>
+          <h3 class="feature-title">Room Allocation System</h3>
+          <p class="feature-desc">Intelligent room allocation with capacity enforcement, duplicate prevention, and block-wise visual occupancy tracking. Real-time availability monitoring.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+          </div>
+          <h3 class="feature-title">Outpass Management</h3>
+          <p class="feature-desc">Digital leave application with multi-type outpass support (day/night/weekend/vacation). Full approval workflow with warden review and status tracking.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          </div>
+          <h3 class="feature-title">Complaint Tracking</h3>
+          <p class="feature-desc">Categorized complaint submission (electrical, plumbing, WiFi, security, etc.) with priority levels, assignment workflows, and resolution tracking.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+          </div>
+          <h3 class="feature-title">Fee Management</h3>
+          <p class="feature-desc">Detailed fee records with hostel, mess, maintenance components. Payment tracking, receipt generation, overdue detection, and financial analytics.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>
+          </div>
+          <h3 class="feature-title">Analytics Dashboard</h3>
+          <p class="feature-desc">Real-time occupancy analytics, fee collection reports, complaint statistics, and hostel-wise student distribution with Chart.js visualizations.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+          </div>
+          <h3 class="feature-title">Mess Menu System</h3>
+          <p class="feature-desc">Weekly mess menu management with breakfast, lunch, snacks, and dinner schedules. Students can view the current week's menu and provide food feedback.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          </div>
+          <h3 class="feature-title">Announcements & Alerts</h3>
+          <p class="feature-desc">Role-targeted announcement publishing with pinning, urgency levels, and in-app notification delivery to students, wardens, and staff.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          </div>
+          <h3 class="feature-title">Secure Authentication</h3>
+          <p class="feature-desc">JWT-based multi-role authentication with bcrypt password hashing, session management, role-based route protection, and activity logging.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ACCESS ROLES -->
+  <section id="roles">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">Role-Based Access Control</div>
+        <h2 class="section-title">Four Distinct Portals.<br/>One Unified Platform.</h2>
+        <p class="section-desc">Each user role has a dedicated dashboard, specific permissions, and access only to the information and operations authorized for their position.</p>
+      </div>
+      <div class="roles-grid">
+        <div class="role-card r1">
+          <div class="role-num">01</div>
+          <h3 class="role-title">Super Administrator</h3>
+          <p class="role-desc">Platform-wide control with unrestricted access to all modules, settings, and data across both hostels.</p>
+          <div class="role-perms">
+            <span class="role-perm">Full system configuration</span>
+            <span class="role-perm">All hostel management</span>
+            <span class="role-perm">Staff & warden management</span>
+            <span class="role-perm">Platform settings & reports</span>
+          </div>
+        </div>
+        <div class="role-card r2">
+          <div class="role-num">02</div>
+          <h3 class="role-title">Hostel Administrator</h3>
+          <p class="role-desc">Operational management of student registrations, room allocations, fees, announcements, and hostel data.</p>
+          <div class="role-perms">
+            <span class="role-perm">Student registration</span>
+            <span class="role-perm">Room & block management</span>
+            <span class="role-perm">Fee management</span>
+            <span class="role-perm">Outpass & complaint review</span>
+          </div>
+        </div>
+        <div class="role-card r3">
+          <div class="role-num">03</div>
+          <h3 class="role-title">Warden</h3>
+          <p class="role-desc">Dedicated portal scoped to the assigned hostel. Full visibility of students, outpasses, complaints, and daily activities.</p>
+          <div class="role-perms">
+            <span class="role-perm">Outpass approval/rejection</span>
+            <span class="role-perm">Complaint management</span>
+            <span class="role-perm">Student supervision</span>
+            <span class="role-perm">Hostel announcements</span>
+          </div>
+        </div>
+        <div class="role-card r4">
+          <div class="role-num">04</div>
+          <h3 class="role-title">Student</h3>
+          <p class="role-desc">Personal dashboard with room details, fee status, leave application, complaint submission, and mess menu access.</p>
+          <div class="role-perms">
+            <span class="role-perm">Leave/outpass application</span>
+            <span class="role-perm">Complaint submission</span>
+            <span class="role-perm">Fee & payment history</span>
+            <span class="role-perm">Mess menu & announcements</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FACILITIES -->
+  <section id="facilities" style="background:var(--bg-main)">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">Campus Facilities</div>
+        <h2 class="section-title">World-Class Amenities<br/>for Resident Students</h2>
+        <p class="section-desc">Vignan's residential facilities are designed to provide a safe, comfortable, and productive living environment for all resident students.</p>
+      </div>
+      <div class="facilities-grid">
+        <div class="facility-item">
+          <div class="facility-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg>
+          </div>
+          <div>
+            <div class="facility-name">High-Speed WiFi</div>
+            <div class="facility-desc">24/7 campus-wide connectivity</div>
+          </div>
+        </div>
+        <div class="facility-item">
+          <div class="facility-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/></svg>
+          </div>
+          <div>
+            <div class="facility-name">Mess & Dining</div>
+            <div class="facility-desc">Nutritious meals, 3 times daily</div>
+          </div>
+        </div>
+        <div class="facility-item">
+          <div class="facility-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          </div>
+          <div>
+            <div class="facility-name">24/7 Security</div>
+            <div class="facility-desc">CCTV, guards, access control</div>
+          </div>
+        </div>
+        <div class="facility-item">
+          <div class="facility-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+          </div>
+          <div>
+            <div class="facility-name">Reading Room</div>
+            <div class="facility-desc">Quiet study environment</div>
+          </div>
+        </div>
+        <div class="facility-item">
+          <div class="facility-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+          </div>
+          <div>
+            <div class="facility-name">Gym & Fitness</div>
+            <div class="facility-desc">Modern equipment, all timings</div>
+          </div>
+        </div>
+        <div class="facility-item">
+          <div class="facility-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13 19.79 19.79 0 0 1 1.61 4.37 2 2 0 0 1 3.59 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.16 6.16l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          </div>
+          <div>
+            <div class="facility-name">Medical Support</div>
+            <div class="facility-desc">First aid, nurse on duty</div>
+          </div>
+        </div>
+        <div class="facility-item">
+          <div class="facility-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+          </div>
+          <div>
+            <div class="facility-name">Laundry Service</div>
+            <div class="facility-desc">In-campus laundry facility</div>
+          </div>
+        </div>
+        <div class="facility-item">
+          <div class="facility-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          </div>
+          <div>
+            <div class="facility-name">Common Room</div>
+            <div class="facility-desc">TV, recreation, interaction</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section>
+    <div class="container">
+      <div class="section-header centered">
+        <div class="section-label">How It Works</div>
+        <h2 class="section-title">Simple. Fast. Transparent.</h2>
+        <p class="section-desc">From admission to room allocation to daily hostel operations — everything managed through one integrated platform.</p>
+      </div>
+      <div class="steps-grid">
+        <div class="step">
+          <div class="step-num">01</div>
+          <h3 class="step-title">Student Registration</h3>
+          <p class="step-desc">Admin registers students with complete profiles including department, year, emergency contacts, and academic details.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">02</div>
+          <h3 class="step-title">Room Allocation</h3>
+          <p class="step-desc">Intelligent room assignment based on availability, capacity constraints, and hostel type. No duplicates, no over-allocation.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">03</div>
+          <h3 class="step-title">Day-to-Day Operations</h3>
+          <p class="step-desc">Students submit outpass requests, complaints, and view announcements. Wardens approve requests and manage hostel operations.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">04</div>
+          <h3 class="step-title">Analytics & Reporting</h3>
+          <p class="step-desc">Real-time dashboards give administrators complete visibility into occupancy, fees, complaints, and campus operations.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <div class="cta-section">
+    <div class="cta-inner">
+      <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:16px">GET STARTED TODAY</div>
+      <h2 class="cta-title">Ready to Transform Campus Living?</h2>
+      <p class="cta-desc">Access your personalized portal and experience a smarter, more connected hostel management system.</p>
+      <div class="cta-btns">
+        <a href="/login.html?role=student" class="btn btn-xl btn-white">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          Student Login
+        </a>
+        <a href="/login.html?role=admin" class="btn btn-xl btn-outline-white">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          Administrator Login
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">Support & Contact</div>
+        <h2 class="section-title">Get Help When You Need It</h2>
+        <p class="section-desc">Reach out to the hostel administration or IT support team for assistance with the platform or hostel-related queries.</p>
+      </div>
+      <div class="contact-grid">
+        <div>
+          <div class="contact-item">
+            <div class="contact-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13 19.79 19.79 0 0 1 1.61 4.37 2 2 0 0 1 3.59 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.16 6.16l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            </div>
+            <div>
+              <div style="font-size:13px;font-weight:700;color:var(--text-primary)">Boys Hostel Office</div>
+              <div style="font-size:13px;color:var(--text-secondary)">0863-2345671</div>
+              <div style="font-size:12px;color:var(--text-muted)">Mon–Sat, 9:00 AM – 6:00 PM</div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13 19.79 19.79 0 0 1 1.61 4.37 2 2 0 0 1 3.59 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.16 6.16l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            </div>
+            <div>
+              <div style="font-size:13px;font-weight:700;color:var(--text-primary)">Girls Hostel Office</div>
+              <div style="font-size:13px;color:var(--text-secondary)">0863-2345672</div>
+              <div style="font-size:12px;color:var(--text-muted)">Mon–Sat, 9:00 AM – 6:00 PM</div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </div>
+            <div>
+              <div style="font-size:13px;font-weight:700;color:var(--text-primary)">Platform Support</div>
+              <div style="font-size:13px;color:var(--text-secondary)">admin@vignan.ac.in</div>
+              <div style="font-size:12px;color:var(--text-muted)">24/7 email support</div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <div>
+              <div style="font-size:13px;font-weight:700;color:var(--text-primary)">Campus Location</div>
+              <div style="font-size:13px;color:var(--text-secondary)">Vignan University, Guntur</div>
+              <div style="font-size:12px;color:var(--text-muted)">Andhra Pradesh 522213</div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="card" style="border-top:3px solid var(--color-inst-blue)">
+            <h3 style="font-size:var(--text-md);font-weight:700;margin-bottom:var(--space-md)">Emergency Contacts</h3>
+            <table class="table">
+              <thead>
+                <tr><th>Service</th><th>Number</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Boys Hostel Warden</td><td class="text-mono">9000000002</td></tr>
+                <tr><td>Girls Hostel Warden</td><td class="text-mono">9000000003</td></tr>
+                <tr><td>Campus Security</td><td class="text-mono">9000000010</td></tr>
+                <tr><td>Medical/Ambulance</td><td class="text-mono">108</td></tr>
+                <tr><td>Police Emergency</td><td class="text-mono">100</td></tr>
+                <tr><td>Fire Department</td><td class="text-mono">101</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="footer-logo-row">
+            <div class="footer-logo">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+            </div>
+            <div class="footer-brand-name">VIGNAN HOSTEL<br/>MANAGEMENT SYSTEM</div>
+          </div>
+          <p class="footer-desc">A unified digital platform for managing campus residential operations — connecting students, wardens, and administration.</p>
+          <div style="font-size:11px;color:var(--text-muted);font-style:italic">"A Smarter Way to Manage Campus Living."</div>
+        </div>
+        <div>
+          <div class="footer-col-title">Platform</div>
+          <div class="footer-links">
+            <a href="#features" class="footer-link">Features</a>
+            <a href="#roles" class="footer-link">Access Roles</a>
+            <a href="#facilities" class="footer-link">Facilities</a>
+            <a href="/login.html" class="footer-link">Login</a>
+          </div>
+        </div>
+        <div>
+          <div class="footer-col-title">Portals</div>
+          <div class="footer-links">
+            <a href="/login.html?role=student" class="footer-link">Student Portal</a>
+            <a href="/login.html?role=admin" class="footer-link">Admin Portal</a>
+            <a href="/login.html?role=warden" class="footer-link">Warden Portal</a>
+          </div>
+        </div>
+        <div>
+          <div class="footer-col-title">University</div>
+          <div class="footer-links">
+            <span class="footer-link" style="cursor:default">Vignan University</span>
+            <span class="footer-link" style="cursor:default">Guntur, Andhra Pradesh</span>
+            <span class="footer-link" style="cursor:default">PIN: 522213</span>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-copyright">© 2024 Vignan University. Vignan Hostel Management System. All rights reserved.</div>
+        <div class="footer-badges">
+          <span class="footer-badge">Secure</span>
+          <span class="footer-badge">Role-Based</span>
+          <span class="footer-badge">MongoDB</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Smooth scroll for nav links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          document.getElementById('mobileNav')?.classList.remove('open');
+        }
+      });
+    });
+  </script>
+</body>
+</html>
+

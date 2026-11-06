@@ -1,0 +1,44 @@
+/* Additional Page Styling & Micro-Interactions */
+.avatar-lg {
+  width: 64px;
+  height: 64px;
+  background: var(--color-royal-blue);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.timeline-item {
+  position: relative;
+  padding-left: 24px;
+  border-left: 2px solid var(--border-color);
+  padding-bottom: 16px;
+}
+
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -5px;
+  top: 0;
+  width: 8px;
+  height: 8px;
+  background: var(--color-inst-blue);
+}
+
+.table-action-btn {
+  padding: 4px 8px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  border: 1px solid var(--border-color);
+  background: var(--bg-surface);
+}
+
+.table-action-btn:hover {
+  background: var(--bg-secondary);
+  border-color: var(--border-strong);
+}
+

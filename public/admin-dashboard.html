@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Dashboard — Vignan Hostel Management System</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="/css/design-system.css"/>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+<body>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <div class="app-layout">
+    <!-- LEFT SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-brand">
+        <div class="sidebar-logo">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <div>
+          <div class="sidebar-brand-name">VIGNAN HMS</div>
+          <div class="sidebar-brand-sub">Admin Control Center</div>
+        </div>
+      </div>
+
+      <div class="sidebar-role-badge">
+        <div class="sidebar-avatar">AD</div>
+        <div style="min-width:0;flex:1;">
+          <div class="sidebar-user-name">Administrator</div>
+          <div class="sidebar-role-name">Administrator</div>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="nav-section">Core Operations</div>
+        <div class="nav-item active" data-section="overview">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          <span class="nav-label">Dashboard</span>
+        </div>
+        <div class="nav-item" data-section="students">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          <span class="nav-label">Student Management</span>
+        </div>
+        <div class="nav-item" data-section="hostels">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          <span class="nav-label">Hostels & Blocks</span>
+        </div>
+        <div class="nav-item" data-section="rooms">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7h18v14H3z"/><path d="M3 11h18"/><path d="M11 7v14"/></svg>
+          <span class="nav-label">Room Allocation</span>
+        </div>
+
+        <div class="nav-section">Administration</div>
+        <div class="nav-item" data-section="outpasses">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+          <span class="nav-label">Outpasses</span>
+          <span class="nav-badge" id="badgeOutpasses">0</span>
+        </div>
+        <div class="nav-item" data-section="complaints">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          <span class="nav-label">Complaints</span>
+          <span class="nav-badge" id="badgeComplaints">0</span>
+        </div>
+        <div class="nav-item" data-section="fees">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+          <span class="nav-label">Fee Management</span>
+        </div>
+        <div class="nav-item" data-section="mess">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+          <span class="nav-label">Mess Schedule</span>
+        </div>
+        <div class="nav-item" data-section="staff">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg>
+          <span class="nav-label">Staff & Wardens</span>
+        </div>
+        <div class="nav-item" data-section="announcements">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          <span class="nav-label">Announcements</span>
+        </div>
+        <div class="nav-item" data-section="reports">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>
+          <span class="nav-label">Reports & Analytics</span>
+        </div>
+      </nav>
+
+      <div class="sidebar-footer">
+        <button class="btn btn-outline-dark w-full" onclick="Auth.logout()" style="color:#CBD5E1;border-color:var(--border-dark);">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+          Sign Out
+        </button>
+      </div>
+    </aside>
+
+    <!-- MAIN WRAPPER -->
+    <main class="main-content">
+      <!-- HEADER -->
+      <header class="top-header">
+        <div class="header-left">
+          <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle Sidebar">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+          </button>
+          <div class="breadcrumb">
+            <span>Admin</span>
+            <span class="breadcrumb-sep">/</span>
+            <span class="breadcrumb-current" id="breadcrumbCurrent">Dashboard Overview</span>
+          </div>
+        </div>
+
+        <div class="header-right">
+          <div class="header-search">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#667085" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input type="text" id="globalSearch" placeholder="Search students, rooms, records..." />
+          </div>
+
+          <div class="dropdown">
+            <button class="header-icon-btn" id="notifBtn" aria-label="Notifications">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+              <span class="header-notif-badge" id="notifBadge">0</span>
+            </button>
+            <div class="notif-panel" id="notifPanel">
+              <div class="notif-header">
+                <span class="fw-bold text-sm">Notifications</span>
+                <button class="btn btn-ghost btn-sm" onclick="markAllNotificationsRead()">Mark all read</button>
+              </div>
+              <div class="notif-list" id="notifList">
+                <div class="p-md text-muted text-xs text-center">No notifications</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="dropdown">
+            <div class="header-profile" id="profileMenuBtn">
+              <div class="header-avatar">AD</div>
+              <span class="header-profile-name">Administrator</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+            </div>
+            <div class="dropdown-menu" id="profileDropdown">
+              <div class="dropdown-item" onclick="navigateTo('overview')">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/></svg>
+                Dashboard
+              </div>
+              <div class="dropdown-item" onclick="openChangePasswordModal()">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                Change Password
+              </div>
+              <div class="dropdown-divider"></div>
+              <div class="dropdown-item danger" onclick="Auth.logout()">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+                Logout
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- PAGE CONTENT AREA -->
+      <div class="page-content">
+
+        <!-- =================== 1. OVERVIEW PANEL =================== -->
+        <section class="section-panel active" id="panel-overview">
+          <div class="page-header">
+            <div>
+              <h1 class="page-title">Executive Operations Center</h1>
+              <p class="page-subtitle">Real-time occupancy status, revenue collections, and active campus requests.</p>
+            </div>
+            <div class="flex gap-sm">
+              <button class="btn btn-outline-dark btn-sm" onclick="loadDashboardOverview()">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
+                Refresh Data
+              </button>
+              <button class="btn btn-crimson btn-sm" onclick="openNewStudentModal()">
+                + Register Student
+              </button>
+            </div>
+          </div>
+
+          <!-- TOP METRICS (8 KPI Cards) -->
+          <div class="grid grid-4 gap-md mb-lg">
+            <div class="metric-card">
+              <div class="metric-label">Total Enrolled Students</div>
+              <div class="metric-value" id="statTotalStudents">0</div>
+              <div class="metric-change positive">Active resident records</div>
+            </div>
+            <div class="metric-card accent-crimson">
+              <div class="metric-label">Total Hostel Rooms</div>
+              <div class="metric-value" id="statTotalRooms">0</div>
+              <div class="metric-change" id="statOccupancyRate">0% Occupancy</div>
+            </div>
+            <div class="metric-card accent-gold">
+              <div class="metric-label">Occupied Rooms</div>
+              <div class="metric-value" id="statOccupiedRooms">0</div>
+              <div class="metric-change"><span id="statAvailableRooms">0</span> available</div>
+            </div>
+            <div class="metric-card accent-warning">
+              <div class="metric-label">Pending Outpass Requests</div>
+              <div class="metric-value" id="statPendingOutpasses">0</div>
+              <div class="metric-change" style="color:var(--color-warning);">Action required</div>
+            </div>
+          </div>
+
+          <div class="grid grid-4 gap-md mb-xl">
+            <div class="metric-card accent-danger">
+              <div class="metric-label">Open Complaints</div>
+              <div class="metric-value" id="statPendingComplaints">0</div>
+              <div class="metric-change" style="color:var(--color-danger);">Unresolved maintenance</div>
+            </div>
+            <div class="metric-card accent-success">
+              <div class="metric-label">Fee Collection (YTD)</div>
+              <div class="metric-value" id="statFeeCollection">₹0</div>
+              <div class="metric-change positive">Verified bank receipts</div>
+            </div>
+            <div class="metric-card accent-info">
+              <div class="metric-label">Outstanding Fees</div>
+              <div class="metric-value" id="statOutstandingFees">₹0</div>
+              <div class="metric-change" style="color:var(--color-warning);">Pending settlement</div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-label">Active Hostels</div>
+              <div class="metric-value" id="statTotalHostels">2</div>
+              <div class="metric-change positive">Bhaskara & Saraswati</div>
+            </div>
+          </div>
+
+          <!-- ANALYTICS CHARTS -->
+          <div class="grid grid-2 gap-lg mb-xl">
+            <div class="card">
+              <div class="card-header">
+                <span class="card-title">Hostel Capacity & Occupancy</span>
+                <span class="badge badge-blue">Live Distribution</span>
+              </div>
+              <div style="height:260px;position:relative;">
+                <canvas id="chartOccupancy"></canvas>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <span class="card-title">Complaints by Category</span>
+                <span class="badge badge-yellow">Department Breakdown</span>
+              </div>
+              <div style="height:260px;position:relative;">
+                <canvas id="chartComplaints"></canvas>
+              </div>
+            </div>
+          </div>
+
+          <!-- RECENT ACTIVITY LOGS -->
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title">Institutional Activity Audit Trail</span>
+              <button class="btn btn-ghost btn-sm" onclick="navigateTo('reports')">View Full Audit Log →</button>
+            </div>
+            <div class="table-container">
+              <table class="table" id="tableRecentActivity">
+                <thead>
+                  <tr>
+                    <th>Timestamp</th>
+                    <th>User</th>
+                    <th>Action</th>
+                    <th>Module</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody id="activityLogTbody">
+                  <tr><td colspan="5" class="text-center text-muted">Loading audit records...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- =================== 2. STUDENT MANAGEMENT PANEL =================== -->
+        <section class="section-panel" id="panel-students">
+          <div class="page-header">
+            <div>
+              <h1 class="page-title">Student Resident Directory</h1>
+              <p class="page-subtitle">Manage student enrollment, department assignments, and contact data.</p>
+            </div>
+            <button class="btn btn-crimson" onclick="openNewStudentModal()">+ Register New Student</button>
+          </div>
+
+          <div class="filter-bar">
+            <input type="text" class="form-control" id="studentSearchInput" placeholder="Search Reg No or Name..." style="min-width:240px;"/>
+            <select class="form-control form-select" id="studentFilterHostel">
+              <option value="">All Hostels</option>
+            </select>
+            <select class="form-control form-select" id="studentFilterDept">
+              <option value="">All Departments</option>
+              <option value="Computer Science & Engineering">CSE</option>
+              <option value="Electronics & Communication Engg">ECE</option>
+              <option value="Mechanical Engineering">ME</option>
+              <option value="Civil Engineering">CE</option>
+              <option value="Information Technology">IT</option>
+            </select>
+            <select class="form-control form-select" id="studentFilterYear">
+              <option value="">All Years</option>
+              <option value="1">Year 1</option>
+              <option value="2">Year 2</option>
+              <option value="3">Year 3</option>
+              <option value="4">Year 4</option>
+            </select>
+            <button class="btn btn-primary" onclick="loadStudents(1)">Filter</button>
+            <button class="btn btn-outline-dark" onclick="resetStudentFilters()">Reset</button>
+          </div>
+
+          <div class="card">
+            <div class="table-container">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Reg Number</th>
+                    <th>Student Name</th>
+                    <th>Hostel</th>
+                    <th>Room</th>
+                    <th>Department</th>
+                    <th>Year</th>
+                    <th>Contact</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="studentTableBody">
+                  <tr><td colspan="8" class="text-center text-muted">Loading students...</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="pagination" id="studentPagination"></div>
+          </div>
+        </section>
+
+        <!-- =================== 3. HOSTEL & BLOCKS PANEL =================== -->
+        <section class="section-panel" id="panel-hostels">
+          <div class="page-header">
+            <div>
+              <h1 class="page-title">Hostels & Campus Blocks</h1>
+              <p class="page-subtitle">Manage residential facilities, blocks, and warden allocations.</p>
+            </div>
+            <div class="flex gap-sm">
+              <button class="btn btn-primary" onclick="openNewBlockModal()">+ Add Block</button>
+              <button class="btn btn-crimson" onclick="openNewHostelModal()">+ Add Hostel</button>
+            </div>
+          </div>
+
+          <div class="grid grid-2 gap-lg mb-xl" id="hostelCardsContainer">
+            <!-- Hostels loaded via JS -->
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title">Block Directory</span>
+            </div>
+            <div class="table-container">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Hostel</th>
+                    <th>Block Name</th>
+                    <th>Code</th>
+                    <th>Floors</th>
+                    <th>Total Rooms</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="blockTableBody">
+                  <tr><td colspan="7" class="text-center text-muted">Loading blocks...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- =================== 4. ROOM MANAGEMENT & ALLOCATION =================== -->
+        <section class="section-panel" id="panel-rooms">
+          <div class="page-header">
+            <div>
+              <h1 class="page-title">Room Allocation Management</h1>
+              <p class="page-subtitle">Assign rooms to students, verify bed availability, and manage vacating.</p>
+            </div>
+            <div class="flex gap-sm">
+              <button class="btn btn-outline-dark" onclick="openNewRoomModal()">+ Add Room</button>
+              <button class="btn btn-crimson" onclick="openAllocateRoomModal()">+ Allocate Room</button>
+            </div>
+          </div>
+
+          <div class="tabs">
+            <button class="tab-btn active" onclick="switchRoomTab('directory', this)">Room Directory & Availability</button>
+            <button class="tab-btn" onclick="switchRoomTab('allocations', this)">Active Allocations</button>
+          </div>
+
+          <!-- Room Tab 1: Directory -->
+          <div class="tab-panel active" id="roomTab-directory">
+            <div class="filter-bar">
+              <select class="form-control form-select" id="roomFilterHostel" onchange="loadBlocksForRoomFilter()">
+                <option value="">All Hostels</option>
+              </select>
+              <select class="form-control form-select" id="roomFilterBlock">
+                <option value="">All Blocks</option>
+              </select>
+              <select class="form-control form-select" id="roomFilterStatus">
+                <option value="">All Statuses</option>
+                <option value="available">Available</option>
+                <option value="partially_occupied">Partially Occupied</option>
+                <option value="occupied">Fully Occupied</option>
+                <option value="maintenance">Maintenance</option>
+              </select>
+              <button class="btn btn-primary" onclick="loadRooms()">Filter Rooms</button>
+            </div>
+
+            <div class="card mb-lg">
+              <div class="card-header">
+                <span class="card-title">Interactive Room Matrix</span>
+                <div class="flex gap-md text-xs">
+                  <span class="flex items-center gap-xs"><span style="width:12px;height:12px;background:var(--bg-success);border:1px solid var(--color-success);display:inline-block;"></span> Available</span>
+                  <span class="flex items-center gap-xs"><span style="width:12px;height:12px;background:var(--bg-warning);border:1px solid var(--color-warning);display:inline-block;"></span> Partial</span>
+                  <span class="flex items-center gap-xs"><span style="width:12px;height:12px;background:var(--bg-danger);border:1px solid var(--color-danger);display:inline-block;"></span> Occupied</span>
+                  <span class="flex items-center gap-xs"><span style="width:12px;height:12px;background:#F1F5F9;border:1px solid var(--border-color);display:inline-block;"></span> Maintenance</span>
+                </div>
+              </div>
+              <div class="room-grid" id="roomVisualGrid" style="max-height:300px;overflow-y:auto;padding:12px;"></div>
+            </div>
+
+            <div class="card">
+              <div class="table-container">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>Room No</th>
+                      <th>Hostel / Block</th>
+                      <th>Floor</th>
+                      <th>Type</th>
+                      <th>Capacity</th>
+                      <th>Occupied</th>
+                      <th>Available</th>
+                      <th>Status</th>
+                      <th>Fee / Mo</th>
+                    </tr>
+                  </thead>
+                  <tbody id="roomTableBody">
+                    <tr><td colspan="9" class="text-center text-muted">Loading rooms...</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- Room Tab 2: Allocations -->
+          <div class="tab-panel" id="roomTab-allocations">
+            <div class="card">
+              <div class="table-container">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>Student</th>
+                      <th>Reg Number</th>
+                      <th>Hostel</th>
+                      <th>Room</th>
+                      <th>Bed</th>
+                      <th>Allocated Date</th>
+                      <th>Status</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody id="allocationsTableBody">
+                    <tr><td colspan="8" class="text-center text-muted">Loading allocations...</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- =================== 5. OUTPASSES PANEL =================== -->
+        <section class="section-panel" id="panel-outpasses">
+          <div class="page-header">
+            <div>
+              <h1 class="page-title">Student Outpass & Leave Approvals</h1>
+              <p class="page-subtitle">Monitor and verify student movement requests across all hostel gates.</p>
+            </div>
+          </div>
+
+          <div class="filter-bar">
+            <select class="form-control form-select" id="outpassFilterStatus">
+              <option value="">All Statuses</option>
+              <option value="pending" selected>Pending Review</option>
+              <option value="approved">Approved</option>
+              <option value="rejected">Rejected</option>
+              <option value="returned">Returned</option>
+            </select>
+            <button class="btn btn-primary" onclick="loadOutpasses(1)">Filter</button>
+          </div>
+
+          <div class="card">
+            <div class="table-container">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Student Name</th>
+                    <th>Hostel</th>
+                    <th>Type</th>
+                    <th>Purpose</th>
+                    <th>Destination</th>
+                    <th>Departure</th>
+                    <th>Return</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="outpassTableBody">
+                  <tr><td colspan="9" class="text-center text-muted">Loading outpass applications...</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="pagination" id="outpassPagination"></div>
+          </div>
+        </section>
+
+        <!-- =================== 6. COMPLAINTS PANEL =================== -->
+        <section class="section-panel" id="panel-complaints">
+          <div class="page-header">
+            <div>
+              <h1 class="page-title">Hostel Maintenance & Complaints</h1>
+              <p class="page-subtitle">Track, assign, and resolve student maintenance and facility requests.</p>
+            </div>
+          </div>
+
+          <div class="filter-bar">
+            <select class="form-control form-select" id="complaintFilterCategory">
+              <option value="">All Categories</option>
+              <option value="electrical">Electrical</option>
+              <option value="plumbing">Plumbing</option>
+              <option value="wifi">WiFi / Network</option>
+              <option value="furniture">Furniture</option>
+              <option value="cleaning">Cleaning</option>
+              <option value="security">Security</option>
+              <option value="mess">Mess</option>
+            </select>
+            <select class="form-control form-select" id="complaintFilterStatus">
+              <option value="">All Statuses</option>
+              <option value="pending">Pending</option>
+              <option value="in_progress">In Progress</option>
+              <option value="resolved">Resolved</option>
+            </select>
+            <button class="btn btn-primary" onclick="loadComplaints(1)">Apply Filter</button>
+          </div>
+
+          <div class="card">
+            <div class="table-container">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Ticket ID</th>
+                    <th>Student</th>
+                    <th>Category</th>
+                    <th>Title & Issue</th>
+                    <th>Priority</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="complaintTableBody">
+                  <tr><td colspan="8" class="text-center text-muted">Loading complaints...</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="pagination" id="complaintPagination"></div>
+          </div>
+        </section>
+
+        <!-- =================== 7. FEE MANAGEMENT PANEL =================== -->
+        <section class="section-panel" id="panel-fees">
+          <div class="page-header">
+            <div>
+              <h1 class="page-title">Hostel Financial & Fee Records</h1>
+              <p class="page-subtitle">Track student fee balances, log cash/bank payments, and generate official receipts.</p>
+            </div>
+            <div class="flex gap-sm">
+              <button class="btn btn-outline-dark" onclick="openNewFeeModal()">+ Generate Fee Invoice</button>
+              <button class="btn btn-crimson" onclick="openRecordPaymentModal()">+ Record Payment</button>
+            </div>
+          </div>
+
+          <div class="filter-bar">
+            <select class="form-control form-select" id="feeFilterStatus">
+              <option value="">All Fee Statuses</option>
+              <option value="pending">Pending</option>
+              <option value="partial">Partially Paid</option>
+              <option value="paid">Fully Settled</option>
+              <option value="overdue">Overdue</option>
+            </select>
+            <button class="btn btn-primary" onclick="loadFees(1)">Filter Fees</button>
+          </div>
+
+          <div class="card">
+            <div class="table-container">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Student Name</th>
+                    <th>Hostel</th>
+                    <th>Academic Term</th>
+                    <th>Total Fee</th>
+                    <th>Paid Amount</th>
+                    <th>Outstanding</th>
+                    <th>Due Date</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="feeTableBody">
+                  <tr><td colspan="9" class="text-center text-muted">Loading fee records...</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="pagination" id="feePagination"></div>
+          </div>
+        </section>
+
+        <!-- =================== 8. MESS MANAGEMENT PANEL =================== -->
+        <section class="section-panel" id="panel-mess">
+          <div class="page-header">
+            <div>
+              <h1 class="page-title">Mess Timetable & Menu Administration</h1>
+              <p class="page-subtitle">Configure daily meal menus and schedules for resident students.</p>
+            </div>
+            <button class="btn btn-crimson" onclick="openEditMessModal()">Update Weekly Menu</button>
+          </div>
+
+          <div class="card" id="messMenuContainer">
+            <div class="p-lg text-center text-muted">Loading current mess schedule...</div>
+          </div>
+        </section>
+
+        <!-- =================== 9. STAFF & WARDENS PANEL =================== -->
+        <section class="section-panel" id="panel-staff">
+          <div class="page-header">
+            <div>
+              <h1 class="page-title">Hostel Wardens & Campus Staff</h1>
+              <p class="page-subtitle">Manage residential staff, security personnel, and warden assignments.</p>
+            </div>
+            <button class="btn btn-crimson" onclick="openNewStaffModal()">+ Add Staff Member</button>
+          </div>
+
+          <div class="card">
+            <div class="table-container">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Employee ID</th>
+                    <th>Name</th>
+                    <th>Designation</th>
+                    <th>Hostel Assigned</th>
+                    <th>Phone</th>
+                    <th>Email</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="staffTableBody">
+                  <tr><td colspan="8" class="text-center text-muted">Loading staff records...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- =================== 10. ANNOUNCEMENTS PANEL =================== -->
+        <section class="section-panel" id="panel-announcements">
+          <div class="page-header">
+            <div>
+              <h1 class="page-title">Broadcast Institutional Announcements</h1>
+              <p class="page-subtitle">Publish official circulars, maintenance notices, and urgent alerts.</p>
+            </div>
+            <button class="btn btn-crimson" onclick="openNewAnnouncementModal()">+ Publish Announcement</button>
+          </div>
+
+          <div class="grid grid-2 gap-lg" id="announcementsGrid">
+            <!-- Announcements loaded via JS -->
+          </div>
+        </section>
+
+        <!-- =================== 11. REPORTS PANEL =================== -->
+        <section class="section-panel" id="panel-reports">
+          <div class="page-header">
+            <div>
+              <h1 class="page-title">Reports & Audit Logs</h1>
+              <p class="page-subtitle">Detailed audit records, compliance logs, and administrative transaction histories.</p>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title">Full Audit Trail</span>
+            </div>
+            <div class="table-container">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Timestamp</th>
+                    <th>User</th>
+                    <th>Module</th>
+                    <th>Action</th>
+                    <th>Details</th>
+                    <th>IP Address</th>
+                  </tr>
+                </thead>
+                <tbody id="fullAuditLogTbody">
+                  <tr><td colspan="6" class="text-center text-muted">Loading complete audit logs...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- =================== MODALS =================== -->
+
+  <!-- 1. Register Student Modal -->
+  <div class="modal-overlay" id="modalNewStudent">
+    <div class="modal" style="max-width:680px;">
+      <div class="modal-header">
+        <h3 class="modal-title">Register Resident Student</h3>
+        <button class="btn-ghost" onclick="Modal.close('modalNewStudent')">✕</button>
+      </div>
+      <form id="formNewStudent" onsubmit="handleCreateStudent(event)">
+        <div class="modal-body">
+          <div class="grid grid-2 gap-md">
+            <div class="form-group">
+              <label class="form-label">Full Name *</label>
+              <input type="text" name="name" class="form-control" required placeholder="e.g. Ramesh Kumar"/>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Registration Number *</label>
+              <input type="text" name="registrationNumber" class="form-control" required placeholder="e.g. VU2024CS001"/>
+            </div>
+          </div>
+          <div class="grid grid-2 gap-md">
+            <div class="form-group">
+              <label class="form-label">Institutional Email *</label>
+              <input type="email" name="email" class="form-control" required placeholder="student@vignan.ac.in"/>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Default Password *</label>
+              <input type="password" name="password" class="form-control" required value="Student@123"/>
+            </div>
+          </div>
+          <div class="grid grid-3 gap-md">
+            <div class="form-group">
+              <label class="form-label">Department *</label>
+              <select name="department" class="form-control form-select" required>
+                <option value="Computer Science & Engineering">CSE</option>
+                <option value="Electronics & Communication Engg">ECE</option>
+                <option value="Mechanical Engineering">ME</option>
+                <option value="Civil Engineering">CE</option>
+                <option value="Information Technology">IT</option>
+                <option value="Electrical & Electronics Engg">EEE</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Academic Year *</label>
+              <select name="year" class="form-control form-select" required>
+                <option value="1">1st Year</option>
+                <option value="2">2nd Year</option>
+                <option value="3">3rd Year</option>
+                <option value="4">4th Year</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Gender *</label>
+              <select name="gender" class="form-control form-select" required>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+              </select>
+            </div>
+          </div>
+          <div class="grid grid-2 gap-md">
+            <div class="form-group">
+              <label class="form-label">Student Phone</label>
+              <input type="text" name="phone" class="form-control" placeholder="10-digit mobile number"/>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Blood Group</label>
+              <select name="bloodGroup" class="form-control form-select">
+                <option value="O+">O+</option>
+                <option value="A+">A+</option>
+                <option value="B+">B+</option>
+                <option value="AB+">AB+</option>
+                <option value="O-">O-</option>
+              </select>
+            </div>
+          </div>
+          <div class="grid grid-2 gap-md">
+            <div class="form-group">
+              <label class="form-label">Parent / Guardian Name</label>
+              <input type="text" name="parentName" class="form-control" placeholder="Guardian name"/>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Parent Contact Number</label>
+              <input type="text" name="parentPhone" class="form-control" placeholder="Guardian phone"/>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-dark" onclick="Modal.close('modalNewStudent')">Cancel</button>
+          <button type="submit" class="btn btn-crimson">Create Student Record</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 2. Allocate Room Modal -->
+  <div class="modal-overlay" id="modalAllocateRoom">
+    <div class="modal" style="max-width:540px;">
+      <div class="modal-header">
+        <h3 class="modal-title">Assign Room Allocation</h3>
+        <button class="btn-ghost" onclick="Modal.close('modalAllocateRoom')">✕</button>
+      </div>
+      <form id="formAllocateRoom" onsubmit="handleAllocateRoom(event)">
+        <div class="modal-body">
+          <div class="form-group">
+            <label class="form-label">Select Student *</label>
+            <select name="studentId" id="allocSelectStudent" class="form-control form-select" required>
+              <option value="">Select an unassigned student...</option>
+            </select>
+          </div>
+          <div class="grid grid-2 gap-md">
+            <div class="form-group">
+              <label class="form-label">Hostel *</label>
+              <select name="hostelId" id="allocSelectHostel" class="form-control form-select" required onchange="onAllocHostelChange()">
+                <option value="">Select hostel...</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Block *</label>
+              <select name="blockId" id="allocSelectBlock" class="form-control form-select" required onchange="onAllocBlockChange()">
+                <option value="">Select block...</option>
+              </select>
+            </div>
+          </div>
+          <div class="grid grid-2 gap-md">
+            <div class="form-group">
+              <label class="form-label">Available Room *</label>
+              <select name="roomId" id="allocSelectRoom" class="form-control form-select" required>
+                <option value="">Select room...</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Bed Assignment *</label>
+              <input type="text" name="bedNumber" class="form-control" required value="Bed-1"/>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Academic Year</label>
+            <input type="text" name="academicYear" class="form-control" value="2024-25" required/>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-dark" onclick="Modal.close('modalAllocateRoom')">Cancel</button>
+          <button type="submit" class="btn btn-crimson">Confirm Allocation</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 3. Record Payment Modal -->
+  <div class="modal-overlay" id="modalRecordPayment">
+    <div class="modal" style="max-width:520px;">
+      <div class="modal-header">
+        <h3 class="modal-title">Record Verified Fee Payment</h3>
+        <button class="btn-ghost" onclick="Modal.close('modalRecordPayment')">✕</button>
+      </div>
+      <form id="formRecordPayment" onsubmit="handleRecordPayment(event)">
+        <div class="modal-body">
+          <div class="form-group">
+            <label class="form-label">Select Student Fee Invoice *</label>
+            <select name="feeId" id="paymentSelectFee" class="form-control form-select" required>
+              <option value="">Select pending invoice...</option>
+            </select>
+          </div>
+          <div class="grid grid-2 gap-md">
+            <div class="form-group">
+              <label class="form-label">Amount Paid (₹) *</label>
+              <input type="number" name="amount" class="form-control" required min="100"/>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Payment Mode *</label>
+              <select name="paymentMode" class="form-control form-select" required>
+                <option value="online">Online / Net Banking</option>
+                <option value="upi">UPI Gateway</option>
+                <option value="dd">Demand Draft (DD)</option>
+                <option value="cash">Accounts Cash Desk</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Bank Transaction / Ref ID *</label>
+            <input type="text" name="transactionId" class="form-control" required placeholder="e.g. UTR-982310248"/>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Receipt Remarks</label>
+            <input type="text" name="remarks" class="form-control" placeholder="Optional audit remark"/>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-dark" onclick="Modal.close('modalRecordPayment')">Cancel</button>
+          <button type="submit" class="btn btn-success">Issue Payment Receipt</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 4. Publish Announcement Modal -->
+  <div class="modal-overlay" id="modalNewAnnouncement">
+    <div class="modal" style="max-width:580px;">
+      <div class="modal-header">
+        <h3 class="modal-title">Publish Campus Announcement</h3>
+        <button class="btn-ghost" onclick="Modal.close('modalNewAnnouncement')">✕</button>
+      </div>
+      <form id="formNewAnnouncement" onsubmit="handleCreateAnnouncement(event)">
+        <div class="modal-body">
+          <div class="form-group">
+            <label class="form-label">Announcement Title *</label>
+            <input type="text" name="title" class="form-control" required placeholder="e.g. Scheduled Water Maintenance Block A"/>
+          </div>
+          <div class="grid grid-2 gap-md">
+            <div class="form-group">
+              <label class="form-label">Category *</label>
+              <select name="type" class="form-control form-select" required>
+                <option value="general">General Notice</option>
+                <option value="urgent">Urgent Security Alert</option>
+                <option value="maintenance">Maintenance</option>
+                <option value="event">Campus Event</option>
+                <option value="fee">Fee Deadline</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Target Audience *</label>
+              <select name="targetAudience" class="form-control form-select" required>
+                <option value="all">Everyone (All Hostels)</option>
+                <option value="students">Students Only</option>
+                <option value="wardens">Wardens & Staff Only</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Content / Notice Details *</label>
+            <textarea name="content" class="form-control" required style="min-height:120px;" placeholder="Full text of notice..."></textarea>
+          </div>
+          <div class="form-group">
+            <label class="flex items-center gap-sm cursor-pointer text-sm">
+              <input type="checkbox" name="isPinned" value="true"/>
+              Pin this notice at the top of the dashboard
+            </label>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-dark" onclick="Modal.close('modalNewAnnouncement')">Cancel</button>
+          <button type="submit" class="btn btn-crimson">Broadcast Notice</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 5. Review Outpass Modal -->
+  <div class="modal-overlay" id="modalReviewOutpass">
+    <div class="modal" style="max-width:480px;">
+      <div class="modal-header">
+        <h3 class="modal-title">Review Outpass Request</h3>
+        <button class="btn-ghost" onclick="Modal.close('modalReviewOutpass')">✕</button>
+      </div>
+      <form id="formReviewOutpass" onsubmit="handleReviewOutpass(event)">
+        <input type="hidden" id="reviewOutpassId"/>
+        <div class="modal-body">
+          <div id="reviewOutpassDetails" class="mb-md text-sm"></div>
+          <div class="form-group">
+            <label class="form-label">Decision *</label>
+            <select id="reviewOutpassDecision" class="form-control form-select" required onchange="toggleRejectionReason()">
+              <option value="approved">Approve Outpass</option>
+              <option value="rejected">Reject Outpass</option>
+            </select>
+          </div>
+          <div class="form-group" id="rejectionReasonGroup" style="display:none;">
+            <label class="form-label">Rejection Reason</label>
+            <textarea id="reviewRejectionReason" class="form-control" placeholder="Specify why the outpass was declined..."></textarea>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Administrative Remarks</label>
+            <input type="text" id="reviewRemarks" class="form-control" placeholder="Internal notes..."/>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-dark" onclick="Modal.close('modalReviewOutpass')">Cancel</button>
+          <button type="submit" class="btn btn-primary">Submit Decision</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 6. Review Complaint Modal -->
+  <div class="modal-overlay" id="modalReviewComplaint">
+    <div class="modal" style="max-width:520px;">
+      <div class="modal-header">
+        <h3 class="modal-title">Update Complaint Ticket</h3>
+        <button class="btn-ghost" onclick="Modal.close('modalReviewComplaint')">✕</button>
+      </div>
+      <form id="formReviewComplaint" onsubmit="handleReviewComplaint(event)">
+        <input type="hidden" id="reviewComplaintId"/>
+        <div class="modal-body">
+          <div id="reviewComplaintDetails" class="mb-md text-sm"></div>
+          <div class="form-group">
+            <label class="form-label">Resolution Status *</label>
+            <select id="reviewComplaintStatus" class="form-control form-select" required>
+              <option value="in_progress">In Progress / Assigned</option>
+              <option value="resolved">Resolved & Closed</option>
+              <option value="rejected">Rejected / Invalid</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Resolution Summary / Action Taken</label>
+            <textarea id="reviewComplaintNotes" class="form-control" placeholder="Describe the maintenance action or resolution details..."></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-dark" onclick="Modal.close('modalReviewComplaint')">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Ticket Status</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 7. Change Password Modal -->
+  <div class="modal-overlay" id="modalChangePassword">
+    <div class="modal" style="max-width:440px;">
+      <div class="modal-header">
+        <h3 class="modal-title">Change Password</h3>
+        <button class="btn-ghost" onclick="Modal.close('modalChangePassword')">✕</button>
+      </div>
+      <form onsubmit="handleChangePassword(event)">
+        <div class="modal-body">
+          <div class="form-group">
+            <label class="form-label">Current Password *</label>
+            <input type="password" id="currentPassword" class="form-control" required/>
+          </div>
+          <div class="form-group">
+            <label class="form-label">New Password *</label>
+            <input type="password" id="newPassword" class="form-control" required minlength="6"/>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-dark" onclick="Modal.close('modalChangePassword')">Cancel</button>
+          <button type="submit" class="btn btn-primary">Update Password</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="/js/api.js"></script>
+  <script src="/js/auth.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/dashboard-admin.js"></script>
+</body>
+</html>
+

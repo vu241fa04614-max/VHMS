@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login — Vignan Hostel Management System</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="/css/design-system.css"/>
+  <style>
+    body {
+      background: var(--color-midnight);
+      min-height: 100vh;
+      display: flex;
+      align-items: stretch;
+      margin: 0;
+    }
+
+    .login-left {
+      flex: 1;
+      background: var(--color-midnight);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 60px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .login-left::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-image:
+        linear-gradient(rgba(23,63,112,0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(23,63,112,0.1) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+
+    .login-left-content {
+      position: relative;
+      z-index: 1;
+      max-width: 480px;
+    }
+
+    .login-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 48px;
+    }
+
+    .login-brand-logo {
+      width: 44px;
+      height: 44px;
+      background: var(--color-crimson);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .login-brand-name {
+      font-size: 15px;
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.1;
+    }
+
+    .login-brand-sub {
+      font-size: 10px;
+      color: var(--text-on-dark);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .login-heading {
+      font-size: 40px;
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 20px;
+    }
+
+    .login-heading span { color: var(--color-gold); }
+
+    .login-desc {
+      font-size: 15px;
+      color: var(--text-on-dark);
+      line-height: 1.65;
+      margin-bottom: 48px;
+    }
+
+    .login-features { display: flex; flex-direction: column; gap: 16px; }
+
+    .login-feature {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+    }
+
+    .login-feature-icon {
+      width: 36px;
+      height: 36px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: var(--color-gold);
+    }
+
+    .login-feature-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 2px;
+    }
+
+    .login-feature-desc {
+      font-size: 12px;
+      color: var(--text-on-dark);
+    }
+
+    .login-left-footer {
+      position: absolute;
+      bottom: 32px;
+      left: 60px;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    /* Right Panel */
+    .login-right {
+      width: 480px;
+      background: var(--bg-surface);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 60px 48px;
+      position: relative;
+    }
+
+    .login-right::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 4px;
+      height: 100%;
+      background: var(--color-inst-blue);
+    }
+
+    .login-form-header {
+      margin-bottom: 32px;
+    }
+
+    .login-form-title {
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--text-primary);
+      margin-bottom: 6px;
+    }
+
+    .login-form-sub {
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+
+    /* Role Selector */
+    .role-selector {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 28px;
+    }
+
+    .role-btn {
+      padding: 12px 10px;
+      border: 2px solid var(--border-color);
+      background: var(--bg-surface);
+      cursor: pointer;
+      text-align: center;
+      transition: border-color var(--transition-fast), background var(--transition-fast);
+    }
+
+    .role-btn:hover { border-color: var(--color-inst-blue); background: var(--bg-secondary); }
+
+    .role-btn.active {
+      border-color: var(--color-inst-blue);
+      background: #EFF6FF;
+    }
+
+    .role-btn-icon {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 6px;
+      color: var(--text-secondary);
+    }
+
+    .role-btn.active .role-btn-icon { color: var(--color-inst-blue); }
+
+    .role-btn-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .role-btn.active .role-btn-label { color: var(--color-inst-blue); }
+
+    /* Login Form */
+    .login-form { }
+
+    .login-error {
+      display: none;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 14px;
+      background: var(--bg-danger);
+      border: 1px solid #FECACA;
+      border-left: 4px solid var(--color-danger);
+      margin-bottom: 20px;
+      font-size: 13px;
+      color: #991B1B;
+    }
+
+    .login-error.visible { display: flex; }
+
+    .login-btn {
+      width: 100%;
+      padding: 14px;
+      background: var(--color-inst-blue);
+      color: #fff;
+      border: none;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: var(--font-primary);
+      transition: background var(--transition-fast);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .login-btn:hover { background: var(--color-midnight); }
+    .login-btn:disabled { opacity: 0.65; cursor: not-allowed; }
+
+    .login-btn-spinner {
+      display: none;
+      width: 16px;
+      height: 16px;
+      border: 2px solid #fff;
+      border-right-color: transparent;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .login-btn.loading .login-btn-spinner { display: block; }
+    .login-btn.loading .login-btn-text { opacity: 0.7; }
+
+    .password-wrapper {
+      position: relative;
+    }
+
+    .password-toggle {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      padding: 4px;
+      display: flex;
+      align-items: center;
+    }
+
+    .password-toggle:hover { color: var(--text-secondary); }
+
+    .login-divider {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 24px 0;
+    }
+
+    .login-divider-line { flex: 1; height: 1px; background: var(--border-color); }
+    .login-divider-text { font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; }
+
+    .demo-creds {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      padding: 14px;
+    }
+
+    .demo-creds-title {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 10px;
+    }
+
+    .demo-cred-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 6px 0;
+      border-bottom: 1px solid var(--border-color);
+      cursor: pointer;
+      transition: background var(--transition-fast);
+    }
+
+    .demo-cred-row:last-child { border-bottom: none; }
+    .demo-cred-row:hover { background: rgba(23,63,112,0.05); }
+
+    .demo-cred-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--color-inst-blue);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .demo-cred-email { font-size: 11px; color: var(--text-secondary); font-family: var(--font-mono); }
+
+    .demo-use-btn {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--color-inst-blue);
+      background: none;
+      border: 1px solid var(--border-color);
+      padding: 2px 8px;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      font-family: var(--font-primary);
+    }
+
+    .demo-use-btn:hover { background: var(--color-inst-blue); color: #fff; border-color: var(--color-inst-blue); }
+
+    .login-back {
+      position: absolute;
+      top: 24px;
+      right: 24px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      color: var(--text-secondary);
+      transition: color var(--transition-fast);
+    }
+
+    .login-back:hover { color: var(--text-primary); }
+
+    @media (max-width: 1024px) {
+      .login-left { display: none; }
+      .login-right { width: 100%; padding: 48px 32px; }
+      .login-right::before { display: none; }
+    }
+
+    @media (max-width: 480px) {
+      .login-right { padding: 32px 20px; }
+      .role-selector { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Left Info Panel -->
+  <div class="login-left">
+    <div class="login-left-content">
+      <div class="login-brand">
+        <div class="login-brand-logo">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <div>
+          <div class="login-brand-name">VIGNAN HOSTEL<br/>MANAGEMENT SYSTEM</div>
+          <div class="login-brand-sub">Vignan University · Guntur</div>
+        </div>
+      </div>
+      <h1 class="login-heading">Welcome to<br/><span>VHMS Portal</span></h1>
+      <p class="login-desc">Securely access your hostel management dashboard. Each role provides a tailored interface designed for your specific responsibilities.</p>
+      <div class="login-features">
+        <div class="login-feature">
+          <div class="login-feature-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          </div>
+          <div>
+            <div class="login-feature-title">Role-Based Security</div>
+            <div class="login-feature-desc">JWT authentication with bcrypt password hashing. Each role sees only what they're authorized to access.</div>
+          </div>
+        </div>
+        <div class="login-feature">
+          <div class="login-feature-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <div>
+            <div class="login-feature-title">Secure & Private</div>
+            <div class="login-feature-desc">Student data, financial records, and personal information are protected with enterprise-grade security.</div>
+          </div>
+        </div>
+        <div class="login-feature">
+          <div class="login-feature-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <div>
+            <div class="login-feature-title">Always Available</div>
+            <div class="login-feature-desc">24/7 platform availability backed by MongoDB Atlas cloud infrastructure.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="login-left-footer">© 2024 Vignan University. All rights reserved.</div>
+  </div>
+
+  <!-- Right Form Panel -->
+  <div class="login-right">
+    <a href="/" class="login-back">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+      Back to Homepage
+    </a>
+
+    <div class="login-form-header">
+      <h2 class="login-form-title" id="formTitle">Sign In to Your Account</h2>
+      <p class="login-form-sub" id="formSub">Select your role and enter your credentials below.</p>
+    </div>
+
+    <!-- Role Selector -->
+    <div class="role-selector" id="roleSelector">
+      <button class="role-btn" data-role="student" onclick="selectRole('student')">
+        <div class="role-btn-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <div class="role-btn-label">Student</div>
+      </button>
+      <button class="role-btn" data-role="warden" onclick="selectRole('warden')">
+        <div class="role-btn-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div class="role-btn-label">Warden</div>
+      </button>
+      <button class="role-btn" data-role="admin" onclick="selectRole('admin')">
+        <div class="role-btn-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        </div>
+        <div class="role-btn-label">Admin</div>
+      </button>
+      <button class="role-btn" data-role="super_admin" onclick="selectRole('super_admin')">
+        <div class="role-btn-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <div class="role-btn-label">Super Admin</div>
+      </button>
+    </div>
+
+    <!-- Error Message -->
+    <div class="login-error" id="loginError">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" flex-shrink="0"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+      <span id="loginErrorMsg">Invalid credentials. Please try again.</span>
+    </div>
+
+    <!-- Form -->
+    <form class="login-form" id="loginForm" novalidate autocomplete="off">
+      <div class="form-group">
+        <label class="form-label" for="email">Email Address</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          class="form-control"
+          placeholder="your.name@vignan.ac.in"
+          autocomplete="username"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="password">Password</label>
+        <div class="password-wrapper">
+          <input
+            type="password"
+            id="password"
+            name="password"
+            class="form-control"
+            placeholder="Enter your password"
+            autocomplete="current-password"
+            required
+          />
+          <button type="button" class="password-toggle" id="togglePwd" aria-label="Toggle password visibility">
+            <svg id="eyeIcon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          </button>
+        </div>
+      </div>
+      <button type="submit" class="login-btn" id="loginBtn">
+        <div class="login-btn-spinner" id="loginSpinner"></div>
+        <span class="login-btn-text" id="loginBtnText">Sign In</span>
+      </button>
+    </form>
+
+    <div class="login-divider">
+      <div class="login-divider-line"></div>
+      <span class="login-divider-text">Demo Credentials</span>
+      <div class="login-divider-line"></div>
+    </div>
+
+    <div class="demo-creds">
+      <div class="demo-creds-title">Quick Login — Click to fill</div>
+      <div class="demo-cred-row" onclick="fillDemo('superadmin@vignan.ac.in','Admin@123','super_admin')">
+        <div>
+          <div class="demo-cred-label">Super Admin</div>
+          <div class="demo-cred-email">superadmin@vignan.ac.in</div>
+        </div>
+        <button class="demo-use-btn">Use</button>
+      </div>
+      <div class="demo-cred-row" onclick="fillDemo('admin@vignan.ac.in','Admin@123','admin')">
+        <div>
+          <div class="demo-cred-label">Admin</div>
+          <div class="demo-cred-email">admin@vignan.ac.in</div>
+        </div>
+        <button class="demo-use-btn">Use</button>
+      </div>
+      <div class="demo-cred-row" onclick="fillDemo('warden.boys@vignan.ac.in','Warden@123','warden')">
+        <div>
+          <div class="demo-cred-label">Warden</div>
+          <div class="demo-cred-email">warden.boys@vignan.ac.in</div>
+        </div>
+        <button class="demo-use-btn">Use</button>
+      </div>
+      <div class="demo-cred-row" onclick="fillDemo('arjun.sharma@student.vignan.ac.in','Student@123','student')">
+        <div>
+          <div class="demo-cred-label">Student</div>
+          <div class="demo-cred-email">arjun.sharma@student.vignan.ac.in</div>
+        </div>
+        <button class="demo-use-btn">Use</button>
+      </div>
+    </div>
+
+    <div style="margin-top:20px;text-align:center;">
+      <a href="/" style="font-size:12px;color:var(--text-muted)">← Return to main website</a>
+    </div>
+  </div>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/auth.js"></script>
+  <script>
+    let selectedRole = null;
+
+    // Pre-select role from URL param
+    const urlRole = new URLSearchParams(window.location.search).get('role');
+    if (urlRole) selectRole(urlRole);
+
+    // Redirect if already authenticated
+    if (Auth.isAuthenticated()) Auth.redirectToDashboard();
+
+    function selectRole(role) {
+      selectedRole = role;
+      document.querySelectorAll('.role-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.role === role);
+      });
+      const labels = {
+        student: 'Student Portal',
+        warden: 'Warden Portal',
+        admin: 'Administrator Portal',
+        super_admin: 'Super Admin Portal'
+      };
+      document.getElementById('formTitle').textContent = `Sign In — ${labels[role] || 'Portal'}`;
+    }
+
+    // Password toggle
+    const togglePwd = document.getElementById('togglePwd');
+    const pwdInput = document.getElementById('password');
+    togglePwd.addEventListener('click', () => {
+      const isVisible = pwdInput.type === 'text';
+      pwdInput.type = isVisible ? 'password' : 'text';
+      togglePwd.innerHTML = isVisible
+        ? `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>`
+        : `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>`;
+    });
+
+    // Form submit
+    document.getElementById('loginForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value;
+      const errorEl = document.getElementById('loginError');
+      const loginBtn = document.getElementById('loginBtn');
+
+      errorEl.classList.remove('visible');
+
+      if (!email || !password) {
+        document.getElementById('loginErrorMsg').textContent = 'Please enter your email and password.';
+        errorEl.classList.add('visible');
+        return;
+      }
+
+      loginBtn.disabled = true;
+      loginBtn.classList.add('loading');
+
+      try {
+        const data = await api.login(email, password, selectedRole);
+        Auth.setSession(data.token, data.user);
+        Auth.redirectToDashboard();
+      } catch (err) {
+        document.getElementById('loginErrorMsg').textContent = err.message || 'Login failed. Please check your credentials.';
+        errorEl.classList.add('visible');
+        loginBtn.disabled = false;
+        loginBtn.classList.remove('loading');
+      }
+    });
+
+    function fillDemo(email, password, role) {
+      document.getElementById('email').value = email;
+      document.getElementById('password').value = password;
+      selectRole(role);
+    }
+  </script>
+</body>
+</html>
